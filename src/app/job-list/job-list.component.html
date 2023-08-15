@@ -1,0 +1,40 @@
+<ul class="filter">
+    <li>
+        <button class="tag tool-tag"
+                *ngFor="let tag of selectedToolTags"
+                (click)=removeTool(tag)>{{ tag }}
+            <span>x</span>
+        </button>
+    </li>
+</ul>
+
+<ul>
+    <li class="card"
+        *ngFor="let job of filteredJobs">
+
+        <div class="card-image">
+            <img src="../../assets/images/faceit.svg"
+                 alt="company logo">
+        </div>
+
+        <div class="card-main">
+            <div class="title-section">
+                <h4 class="job-company">{{ job.company }}</h4>
+                <button class="tag new-tag"
+                        *ngIf=job.new>New</button>
+                <button class="tag featured-tag"
+                        *ngIf=job.featured>Featured</button>
+            </div>
+            <h3 class="job-position"
+                (click)="openJobDetail(job)">{{ job.position }}</h3>
+            <h5 class="job-others">{{ job.postedAt }}&emsp;·&emsp;{{ job.contract }}&emsp;·&emsp;{{ job.location }}</h5>
+        </div>
+
+        <div class="tool-tags-section">
+            <button class="tag tool-tag"
+                    *ngFor="let tag of job.tools"
+                    (click)=addTool(tag)>{{ tag }}
+            </button>
+        </div>
+    </li>
+</ul>

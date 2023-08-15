@@ -1,0 +1,38 @@
+//colors
+$primary-color: hsl(180, 29%, 50%);
+$background-color: hsl(180, 52%, 96%);
+
+$light-gray: hsl(180, 31%, 95%);
+$medium-gray: hsl(180, 8%, 52%);
+$dark-gray: hsl(180, 14%, 20%);
+
+//base
+*,
+*::after,
+*::before {
+  box-sizing: inherit;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  box-sizing: border-box;
+  font-size: 62.5%; // 1 rem = 10px  (10/16 = 62.5)
+}
+
+body {
+  min-width: fit-content;
+  min-height: 100vh;
+  font-family: 'League Spartan', sans-serif;
+  font-weight: 700;
+  line-height: 1.7;
+  font-size: 1.6rem;
+
+  background-color: $background-color;
+//   background-size: cover;
+//   background-repeat: no-repeat;
+}
+
+ul {
+    list-style: none;
+}
