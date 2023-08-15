@@ -29,7 +29,7 @@ export class JobListComponent {
 
   filterJobs(filter?: string) {
     if (this.selectedToolTags.size != 0) {
-      this.filteredJobs = this.filteredJobs.filter(job => this.isPresent(job.tools, this.selectedToolTags))
+      this.filteredJobs = this.jobs.filter(job => this.isToolPresent(job.tools, this.selectedToolTags))
       console.log(this.filteredJobs)
     }
     else {
@@ -37,10 +37,8 @@ export class JobListComponent {
     }
   }
 
-  //
   addTool(tool: string): void {
     this.selectedToolTags.add(tool);
-    console.log(tool)
     this.filterJobs(tool);
   }
 
@@ -54,9 +52,9 @@ export class JobListComponent {
     this.filterJobs();
   }
 
-  isPresent(a: string[], b: any) {
-    for (const value of a) {
-      if ((!b.has(value)) || b.size == 0 || a.length == 0) {
+  isToolPresent(jobTools: string[], selectedTags: any) {
+    for (const tag of selectedTags) {
+      if (selectedTags.size == 0 || selectedTags.length == 0 || !jobTools.includes(tag)) {
         return false;
       }
     }
