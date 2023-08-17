@@ -1,4 +1,18 @@
 <header>
     <img src="assets/images/user.png"
          alt="user account icon">
+
+    <form [formGroup]="registerForm">
+        <label>Email address</label>
+        <input type="email"
+               formControlName="email"
+               class="form-control">
+        <label>Password</label>
+        <input type="password"
+               class="form-control"
+               formControlName="password">
+        <button type="submit"
+                (click)="onSubmit(registerForm.value)"
+                class="btn btn-default">Login</button>
+    </form>
 </header>
