@@ -1,13 +1,15 @@
-import { Component, inject } from '@angular/core';
+import { Component, EventEmitter, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Job } from '../models/job';
 import { JoblistingService } from '../services/joblisting.service';
 import { Router } from '@angular/router';
+import { JobFilterComponent } from '../job-filter/job-filter.component';
+import { ToolTagComponent } from '../shared/tool-tag/tool-tag.component';
 
 @Component({
   selector: 'app-job-list',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, JobFilterComponent, ToolTagComponent],
   templateUrl: './job-list.component.html',
   styleUrls: ['./job-list.component.scss']
 })
@@ -28,23 +30,21 @@ export class JobListComponent {
   }
 
   filterJobs(filter?: string) {
-    if (this.selectedToolTags.size != 0) {
-      this.filteredJobs = this.jobs.filter(job => this.isToolPresent(job.tools, this.selectedToolTags))
-      console.log(this.filteredJobs)
-    }
-    else {
-      this.filteredJobs = this.jobs;
-    }
+    this.filteredJobs = this.selectedToolTags.size != 0 ?
+      this.jobs.filter(job => this.isToolPresent(job.tools, this.selectedToolTags))
+      : this.jobs
   }
 
   addTool(tool: string): void {
+    console.log("en el padre addTool" + tool);
+
     this.selectedToolTags.add(tool);
     this.filterJobs(tool);
   }
 
-  removeTool(tool: string): void {
-    this.selectedToolTags.delete(tool);
-    this.filterJobs(tool);
+  tagRemovedHandler(event: any): void {
+    this.selectedToolTags.delete(event);
+    this.filterJobs(event);
   }
 
   clearTool(): void {

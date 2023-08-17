@@ -1,15 +1,8 @@
-<ul class="filter"
-    [ngStyle]="{'visibility': selectedToolTags.size == 0? 'hidden' : 'visible' }">
-    <li>
-        <button class="tag tool-tag"
-                *ngFor="let tag of selectedToolTags"
-                (click)=removeTool(tag)>{{ tag }}
-            <span>x</span>
-        </button>
-    </li>
-</ul>
+<app-job-filter [tags]="selectedToolTags"
+                (tagRemoved)="tagRemovedHandler($event)"></app-job-filter>
 
 <ul class="job-cards">
+
     <li class="card"
         *ngFor="let job of filteredJobs">
 
@@ -21,9 +14,9 @@
         <div class="card-main">
             <div class="title-section">
                 <h4 class="job-company">{{ job.company }}</h4>
-                <button class="tag new-tag"
+                <button class="new-tag"
                         *ngIf=job.new>New</button>
-                <button class="tag featured-tag"
+                <button class="featured-tag"
                         *ngIf=job.featured>Featured</button>
             </div>
             <h3 class="job-position"
@@ -32,10 +25,11 @@
         </div>
 
         <div class="tool-tags-section">
-            <button class="tag tool-tag"
-                    *ngFor="let tag of job.tools"
-                    (click)=addTool(tag)>{{ tag }}
-            </button>
+            <ng-container *ngFor="let tag of job.tools">
+                <app-tool-tag class="tag tool-tag"
+                              (click)=addTool(tag)
+                              [name]=tag></app-tool-tag>
+            </ng-container>
         </div>
     </li>
 </ul>
