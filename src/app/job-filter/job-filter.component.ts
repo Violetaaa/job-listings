@@ -17,8 +17,14 @@ export class JobFilterComponent {
   // Output -> se pasa evento al padre
   @Output() tagRemoved: EventEmitter<string> = new EventEmitter<string>();
 
+  @Output() filterCleared: EventEmitter<string> = new EventEmitter<string>();
+
   onRemoveTag(tag: string) {
     this.tagRemoved.emit(tag);
+  }
+
+  onClearFilter() {
+    this.filterCleared.emit();
   }
 
 }

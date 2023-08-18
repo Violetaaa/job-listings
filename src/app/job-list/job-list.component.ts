@@ -47,7 +47,7 @@ export class JobListComponent {
     this.filterJobs(event);
   }
 
-  clearTool(): void {
+  filterClearedHandler(event: any): void {
     this.selectedToolTags.clear();
     this.filterJobs();
   }

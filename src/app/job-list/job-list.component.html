@@ -1,5 +1,7 @@
 <app-job-filter [tags]="selectedToolTags"
-                (tagRemoved)="tagRemovedHandler($event)"></app-job-filter>
+                (tagRemoved)="tagRemovedHandler($event)"
+                (filterCleared)="
+                filterClearedHandler($event)"></app-job-filter>
 
 <ul class="job-cards">
 
