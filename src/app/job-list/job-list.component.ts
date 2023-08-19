@@ -5,6 +5,7 @@ import { JoblistingService } from '../services/joblisting.service';
 import { Router } from '@angular/router';
 import { JobFilterComponent } from '../job-filter/job-filter.component';
 import { ToolTagComponent } from '../shared/tool-tag/tool-tag.component';
+import { Tags } from '../shared/constants';
 
 @Component({
   selector: 'app-job-list',
@@ -17,8 +18,12 @@ export class JobListComponent {
 
   jobs: Job[];
   filteredJobs!: Job[];
-  joblistingService: JoblistingService = inject(JoblistingService);
   protected selectedToolTags = new Set<string>();
+
+  joblistingService: JoblistingService = inject(JoblistingService);
+
+  protected newTag = Tags.new;
+  protected featuredTag = Tags.featured;
 
   constructor(private router: Router) {
     this.jobs = this.joblistingService.getAllJobs();
@@ -31,13 +36,11 @@ export class JobListComponent {
 
   filterJobs(filter?: string) {
     this.filteredJobs = this.selectedToolTags.size != 0 ?
-      this.jobs.filter(job => this.isToolPresent(job.tools, this.selectedToolTags))
+      this.jobs.filter(job => this.isToolPresent(job, this.selectedToolTags))
       : this.jobs
   }
 
   addTool(tool: string): void {
-    console.log("en el padre addTool" + tool);
-
     this.selectedToolTags.add(tool);
     this.filterJobs(tool);
   }
@@ -52,12 +55,15 @@ export class JobListComponent {
     this.filterJobs();
   }
 
-  isToolPresent(jobTools: string[], selectedTags: any) {
+  isToolPresent(job: any, selectedTags: any): boolean {
+    if (selectedTags.size == 0 || selectedTags.length == 0) return false;
+
     for (const tag of selectedTags) {
-      if (selectedTags.size == 0 || selectedTags.length == 0 || !jobTools.includes(tag)) {
-        return false;
-      }
+      if (!job.tools.includes(tag) && !job[tag.toLowerCase()] == true) return false;
     }
+
     return true;
   }
+
+
 }

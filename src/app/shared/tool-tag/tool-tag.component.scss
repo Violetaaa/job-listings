@@ -1,14 +1,28 @@
 
 .tag {
-    border: none;
     font-weight: 700;
     margin-left: 1.5rem;
-    cursor:pointer;
 
     &:hover, &:focus {
         opacity: 0.8!important;
         transition: all 0.3;
     }
+}
+
+.featured-tag, .new-tag {
+    border-radius: 2rem;
+    padding: 6px 12px;
+    text-transform: uppercase;
+    font-size: 12px;
+    color: #fff;
+}
+
+.featured-tag {
+    background-color:  hsl(180, 14%, 20%);
+}
+
+.new-tag {
+    background-color: hsl(180, 29%, 50%);;
 }
 
 .tool-tag {

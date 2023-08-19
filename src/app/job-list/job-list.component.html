@@ -16,10 +16,17 @@
         <div class="card-main">
             <div class="title-section">
                 <h4 class="job-company">{{ job.company }}</h4>
-                <button class="new-tag"
-                        *ngIf=job.new>New</button>
-                <button class="featured-tag"
-                        *ngIf=job.featured>Featured</button>
+
+                <app-tool-tag *ngIf=job.new
+                              (click)=addTool(newTag)
+                              [name]="newTag">
+                </app-tool-tag>
+
+                <ng-container *ngIf=job.featured>
+                    <app-tool-tag (click)=addTool(featuredTag)
+                                  [name]=featuredTag>
+                    </app-tool-tag>
+                </ng-container>
             </div>
             <h3 class="job-position"
                 (click)="openJobDetail(job)">{{ job.position }}</h3>
@@ -28,8 +35,7 @@
 
         <div class="tool-tags-section">
             <ng-container *ngFor="let tag of job.tools">
-                <app-tool-tag class="tag tool-tag"
-                              (click)=addTool(tag)
+                <app-tool-tag (click)=addTool(tag)
                               [name]=tag></app-tool-tag>
             </ng-container>
         </div>

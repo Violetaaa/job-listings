@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Auth, createUserWithEmailAndPassword } from '@angular/fire/auth';
+import { Auth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from '@angular/fire/auth';
 import { User } from '../models/user';
 
 @Injectable({
@@ -13,6 +13,10 @@ export class AuthService {
 
   register(user: User): any {
     return createUserWithEmailAndPassword(this.auth, user.email, user.password);
+  }
+
+  login(user: User): any {
+    return signInWithEmailAndPassword(this.auth, user.email, user.password);
   }
 }
 
