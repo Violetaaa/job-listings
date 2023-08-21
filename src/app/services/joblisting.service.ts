@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Job } from '../models/job';
+import { BehaviorSubject } from 'rxjs/internal/BehaviorSubject';
+import { Observable } from 'rxjs/internal/Observable';
 
 @Injectable({
   providedIn: 'root'
@@ -159,10 +161,23 @@ export class JoblistingService {
     }
   ];
 
+  private jobs$: BehaviorSubject<Job[]> = new BehaviorSubject<Job[]>([]);
+
+  private filteredJobs$: BehaviorSubject<Job[]> = new BehaviorSubject<Job[]>([]);
+
   constructor() { }
 
-  getAllJobs(): Job[] {
-    return this.jobList;
+  getFilteredJobs(): Observable<Job[]> {
+    return this.filteredJobs$.asObservable();
+  }
+
+  setFilteredJobs(jobs: any) {
+    this.filteredJobs$.next(jobs);
+  }
+
+  getAllJobs(): Observable<Job[]> {
+    this.jobs$.next(this.jobList);
+    return this.jobs$;
   }
 
   getJobById(id: number): Job | undefined {
