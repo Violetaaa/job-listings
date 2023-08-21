@@ -4,36 +4,9 @@
                 filterClearedHandler($event)"></app-job-filter>
 
 <ul class="job-cards">
-
     <li>
         <ng-container *ngFor="let job of filteredJobs">
             <app-job-card [job]=job></app-job-card>
         </ng-container>
-    </li>
-
-    <!-- <div class="card-image">
-            <img src="assets/images/faceit.svg"
-                 alt="company logo">
-        </div>
-        <div class="card-main">
-            <div class="title-section">
-                <h4 class="job-company">{{ job.company }}</h4>
-
-                <app-tool-tag *ngIf=job.new
-                              (click)=addTool(newTag)
-                              [name]="newTag">
-                </app-tool-tag>
-
-                <ng-container *ngIf=job.featured>
-                    <app-tool-tag (click)=addTool(featuredTag)
-                                  [name]=featuredTag>
-                    </app-tool-tag>
-                </ng-container>
-            </div>
-            <h3 class="job-position"
-                (click)="openJobDetail(job)">{{ job.position }}</h3>
-            <h5 class="job-others">{{ job.postedAt }}&emsp;·&emsp;{{ job.contract }}&emsp;·&emsp;{{ job.location }}</h5>
-        </div> -->
-
     </li>
 </ul>
