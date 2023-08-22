@@ -1,0 +1,12 @@
+<ul class="filter">
+    <li>
+        <ng-container *ngFor="let tag of selectedTags$ | async">
+            <app-tool-tag class="tag tool-tag"
+                          (click)=onRemoveTag(tag)
+                          [name]=tag>
+            </app-tool-tag>
+        </ng-container>
+
+    </li>
+    <li (click)="onClearFilter()">Clear</li>
+</ul>

@@ -18,6 +18,7 @@ $dark-gray: hsl(180, 14%, 20%);
 html {
   box-sizing: border-box;
   font-size: 62.5%; // 1 rem = 10px  (10/16 = 62.5)
+  overflow-y: scroll;
 }
 
 body {
@@ -33,6 +34,21 @@ body {
 //   background-repeat: no-repeat;
 }
 
+dialog::backdrop {
+  background: rgba(0,0,0,0.6);
+  backdrop-filter: blur(3px);
+}
+
 ul {
-    list-style: none;
+  list-style: none;
+}
+
+button, a {
+  cursor: pointer;
+  border: none;
+
+  &:hover, &:focus {
+    opacity: 0.8!important;
+    transition: all 0.3;
+  }
 }

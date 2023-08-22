@@ -1,4 +1,4 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute, Params } from '@angular/router';
 import { JoblistingService } from '../services/joblisting.service';
@@ -16,7 +16,7 @@ export class JobDetailsComponent {
   private jobService = inject(JoblistingService)
   private route = inject(ActivatedRoute);
   currentJob: Job | undefined;
-  jobId!: String;
+  jobId!: string;
 
   constructor() {
     this.route.params.subscribe(params => {

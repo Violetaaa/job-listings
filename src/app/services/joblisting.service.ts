@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Job } from '../models/job';
+import { BehaviorSubject } from 'rxjs/internal/BehaviorSubject';
+import { Observable } from 'rxjs/internal/Observable';
 
 @Injectable({
   providedIn: 'root'
@@ -159,13 +161,57 @@ export class JoblistingService {
     }
   ];
 
+  // ?¿
+  private jobs$: BehaviorSubject<Job[]> = new BehaviorSubject<Job[]>([]);
+
+  private readonly _selectedTags$: BehaviorSubject<string[]> = new BehaviorSubject<string[]>([]);
+
   constructor() { }
 
-  getAllJobs(): Job[] {
-    return this.jobList;
+  // get the current value
+  getTags(): Observable<string[]> {
+    return this._selectedTags$.asObservable();
+  }
+
+  // add tag and emit new value
+  addTag(tag: string) {
+    const tags: string[] = this._selectedTags$.getValue();
+
+    if (this._selectedTags$.getValue().indexOf(tag) == -1) {
+      tags.push(tag);
+      this._selectedTags$.next(tags);
+    }
+  }
+
+  // remove tag and emit new value
+  removeTag(tag: string) {
+    this._selectedTags$.next(this._selectedTags$.getValue().filter(t => t != tag));
+  }
+
+  // clear filter
+  removeAllTags() {
+    const empty: string[] = [];
+    console.log(empty);
+    this._selectedTags$.next(empty);
+  }
+
+  isTagEmpty(): boolean {
+    return this._selectedTags$.getValue().length == 0 ? true : false;
+  }
+
+  mapBSToArray(): string[] {
+    return this._selectedTags$.getValue();
+  }
+
+
+  getAllJobs(): Observable<Job[]> {
+    this.jobs$.next(this.jobList);
+    return this.jobs$;
   }
 
   getJobById(id: number): Job | undefined {
     return this.jobList.find(job => job.id === id);
   }
+
+
 }
