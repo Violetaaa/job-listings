@@ -1,7 +1,6 @@
-<ul class="filter"
-    [ngStyle]="{'visibility': tags.size == 0? 'hidden' : 'visible' }">
+<ul class="filter">
     <li>
-        <ng-container *ngFor="let tag of tags">
+        <ng-container *ngFor="let tag of selectedTags$ | async">
             <app-tool-tag class="tag tool-tag"
                           (click)=onRemoveTag(tag)
                           [name]=tag>

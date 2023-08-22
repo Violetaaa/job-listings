@@ -1,12 +1,12 @@
-<app-job-filter [tags]="selectedToolTags"
-                (tagRemoved)="tagRemovedHandler($event)"
-                (filterCleared)="
-                filterClearedHandler($event)"></app-job-filter>
+<app-job-filter *ngIf="(selectedTags$ | async)?.length !=0"
+                (updateFilter)="filterUpdatedHandler()">
+</app-job-filter>
 
 <ul class="job-cards">
     <li>
         <ng-container *ngFor="let job of filteredJobs">
-            <app-job-card [job]=job></app-job-card>
+            <app-job-card (updateFilter)=filterUpdatedHandler()
+                          [job]=job></app-job-card>
         </ng-container>
     </li>
 </ul>

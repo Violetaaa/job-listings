@@ -1,6 +1,8 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ToolTagComponent } from '../shared/tool-tag/tool-tag.component';
+import { JoblistingService } from '../services/joblisting.service';
+import { Observable } from 'rxjs/internal/Observable';
 
 @Component({
   selector: 'app-job-filter',
@@ -9,22 +11,30 @@ import { ToolTagComponent } from '../shared/tool-tag/tool-tag.component';
   templateUrl: './job-filter.component.html',
   styleUrls: ['./job-filter.component.scss']
 })
-export class JobFilterComponent {
+export class JobFilterComponent implements OnInit {
 
-  // Input -> se recibe valor de la prop del padre
+  protected selectedTags$!: Observable<string[]>;
+
+  jobService: JoblistingService = inject(JoblistingService);
+
+  ngOnInit(): void {
+    this.selectedTags$ = this.jobService.getTags();
+  }
+
+
   @Input() tags!: any;
 
   // Output -> se pasa evento al padre
-  @Output() tagRemoved: EventEmitter<string> = new EventEmitter<string>();
-
-  @Output() filterCleared: EventEmitter<string> = new EventEmitter<string>();
+  @Output() updateFilter: EventEmitter<string> = new EventEmitter<string>();
 
   onRemoveTag(tag: string) {
-    this.tagRemoved.emit(tag);
+    this.jobService.removeTag(tag);
+    this.updateFilter.emit();
   }
 
   onClearFilter() {
-    this.filterCleared.emit();
+    this.jobService.removeAllTags();
+    this.updateFilter.emit();
   }
 
 }
