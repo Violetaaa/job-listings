@@ -1,12 +1,13 @@
-<app-job-filter *ngIf="(selectedTags$ | async)?.length !=0"
-                (updateFilter)="filterUpdatedHandler()">
-</app-job-filter>
+<div class="jobs-listing">
+    <app-job-filter [ngStyle]="{'visibility': (selectedTags$ | async)?.length == 0? 'hidden' : 'visible' }"
+                    (updateFilter)="filterUpdatedHandler()">
+    </app-job-filter>
 
-<ul class="job-cards">
-    <li>
-        <ng-container *ngFor="let job of filteredJobs">
+    <ul class="job-cards">
+        <li *ngFor="let job of filteredJobs">
             <app-job-card (updateFilter)=filterUpdatedHandler()
-                          [job]=job></app-job-card>
-        </ng-container>
-    </li>
-</ul>
+                          [job]=job>
+            </app-job-card>
+        </li>
+    </ul>
+</div>
