@@ -13,16 +13,16 @@ import { JoblistingService } from '../services/joblisting.service';
   styleUrls: ['./job-card.component.scss']
 })
 export class JobCardComponent {
+
   @Input() job!: Job;
-  @Output() updateFilter: EventEmitter<string> = new EventEmitter<string>();
 
   protected newTag = Tags.new;
   protected featuredTag = Tags.featured;
 
   jobService: JoblistingService = inject(JoblistingService);
 
+
   onAddTool(tag: string) {
     this.jobService.addTag(tag);
-    this.updateFilter.emit();
   }
 }

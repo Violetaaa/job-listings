@@ -17,52 +17,33 @@ import { Observable } from 'rxjs/internal/Observable';
 })
 export class JobListComponent implements OnInit {
 
-  jobs: Job[] = [];
-  filteredJobs!: Job[];
-
-  protected selectedTags$!: Observable<string[]>;
-
+  private jobs: Job[] = [];
+  protected filteredJobs!: Job[];
+  protected selectedTags!: string[];
   jobService: JoblistingService = inject(JoblistingService);
 
   constructor(private router: Router) { }
 
   ngOnInit(): void {
-    this.jobService.getAllJobs().subscribe(response => this.jobs = response);
-    this.filterJobs();
-    this.selectedTags$ = this.jobService.getTags();
+    this.jobService.getAllJobs().subscribe(response => {
+      this.jobs = response;
+      this.jobService.getTags().subscribe(response => {
+        this.selectedTags = response;
+        this.filteredJobs = this.selectedTags.length === 0 ? this.jobs : this.jobs.filter(job => this.isToolPresent(job))
+      });
+    });
+  }
+
+
+  isToolPresent(job: any): boolean {
+    if (this.selectedTags.length == 0) return false;
+    for (const tag of this.selectedTags) {
+      if (!job.tools.includes(tag) && !job[tag.toLowerCase()] == true) return false;
+    }
+    return true;
   }
 
   openJobDetail(job: Job): void {
     this.router.navigate(['/job/' + job.id]);
   }
-
-  filterJobs() {
-    this.filteredJobs = this.jobService.isTagEmpty() ?
-      this.jobs
-      : this.jobs.filter(job => this.isToolPresent(job))
-  }
-
-  addTool(tool: string): void {
-    this.jobService.addTag(tool);
-    this.filterJobs();
-  }
-
-
-  filterUpdatedHandler(): void {
-    this.filterJobs();
-  }
-
-  isToolPresent(job: any): boolean {
-
-    const tagsList = this.jobService.mapBSToArray();
-
-    if (tagsList.length == 0) return false;
-
-    for (const tag of tagsList) {
-      if (!job.tools.includes(tag) && !job[tag.toLowerCase()] == true) return false;
-    }
-
-    return true;
-  }
-
 }

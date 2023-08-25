@@ -9,12 +9,12 @@
             <h4 class="job-company">{{ job.company }}</h4>
 
             <app-tool-tag *ngIf=job.new
-                          (buttonClicked)=onAddTool(newTag)
+                          (click)=onAddTool(newTag)
                           [name]=newTag>
             </app-tool-tag>
 
             <ng-container *ngIf=job.featured>
-                <app-tool-tag (buttonClicked)=onAddTool(featuredTag)
+                <app-tool-tag (click)=onAddTool(featuredTag)
                               [name]=featuredTag>
                 </app-tool-tag>
             </ng-container>
@@ -26,7 +26,7 @@
 
     <div class="tool-tags-section">
         <ng-container *ngFor="let tag of job.tools">
-            <app-tool-tag (buttonClicked)=onAddTool(tag)
+            <app-tool-tag (click)=onAddTool(tag)
                           [name]=tag></app-tool-tag>
         </ng-container>
     </div>

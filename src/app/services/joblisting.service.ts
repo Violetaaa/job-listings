@@ -163,44 +163,31 @@ export class JoblistingService {
 
   // ?¿
   private jobs$: BehaviorSubject<Job[]> = new BehaviorSubject<Job[]>([]);
-
-  private readonly _selectedTags$: BehaviorSubject<string[]> = new BehaviorSubject<string[]>([]);
+  private selectedTags$: BehaviorSubject<string[]> = new BehaviorSubject<string[]>([]);
 
   // get the current value
   getTags(): Observable<string[]> {
-    return this._selectedTags$.asObservable();
+    return this.selectedTags$.asObservable();
   }
 
   // add tag and emit new value
   addTag(tag: string) {
-    const tags: string[] = this._selectedTags$.getValue();
-
-    if (this._selectedTags$.getValue().indexOf(tag) == -1) {
+    const tags: string[] = this.selectedTags$.getValue();
+    if (this.selectedTags$.getValue().indexOf(tag) == -1) {
       tags.push(tag);
-      this._selectedTags$.next(tags);
+      this.selectedTags$.next(tags);
     }
   }
 
   // remove tag and emit new value
   removeTag(tag: string) {
-    this._selectedTags$.next(this._selectedTags$.getValue().filter(t => t != tag));
+    this.selectedTags$.next(this.selectedTags$.getValue().filter(t => t != tag));
   }
 
   // clear filter
   removeAllTags() {
-    const empty: string[] = [];
-    console.log(empty);
-    this._selectedTags$.next(empty);
+    this.selectedTags$.next([]);
   }
-
-  isTagEmpty(): boolean {
-    return this._selectedTags$.getValue().length == 0 ? true : false;
-  }
-
-  mapBSToArray(): string[] {
-    return this._selectedTags$.getValue();
-  }
-
 
   getAllJobs(): Observable<Job[]> {
     this.jobs$.next(this.jobList);
