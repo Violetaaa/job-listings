@@ -166,8 +166,6 @@ export class JoblistingService {
 
   private readonly _selectedTags$: BehaviorSubject<string[]> = new BehaviorSubject<string[]>([]);
 
-  constructor() { }
-
   // get the current value
   getTags(): Observable<string[]> {
     return this._selectedTags$.asObservable();

@@ -24,18 +24,18 @@ html {
 body {
   min-width: fit-content;
   min-height: 100vh;
-  font-family: 'League Spartan', sans-serif;
+  font-family: "League Spartan", sans-serif;
   font-weight: 700;
   line-height: 1.7;
   font-size: 1.6rem;
 
   background-color: $background-color;
-//   background-size: cover;
-//   background-repeat: no-repeat;
+  //   background-size: cover;
+  //   background-repeat: no-repeat;
 }
 
 dialog::backdrop {
-  background: rgba(0,0,0,0.6);
+  background: rgba(0, 0, 0, 0.6);
   backdrop-filter: blur(3px);
 }
 
@@ -43,12 +43,38 @@ ul {
   list-style: none;
 }
 
-button, a {
+button,
+a {
   cursor: pointer;
   border: none;
 
-  &:hover, &:focus {
-    opacity: 0.8!important;
+  &:hover,
+  &:focus {
+    opacity: 0.8 !important;
     transition: all 0.3;
   }
 }
+
+// .animate-fade-in {
+//   animation-duration: 0.5s;
+//   animation-name: animate-pop;
+//   animation-timing-function: cubic-bezier(0.26, 0.53, 0.74, 1.48);
+// }
+
+// .animate {
+//   animation-duration: 0.5s;
+//   animation-name: animate-pop;
+//   animation-timing-function: ease-in;
+// }
+
+// @keyframes animate-pop {
+//   0% {
+//     opacity: 0;
+//     transform: scale(0.8, 0.8);
+//   }
+
+//   100% {
+//     opacity: 1;
+//     transform: scale(1, 1);
+//   }
+// }

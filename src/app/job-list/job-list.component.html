@@ -1,5 +1,5 @@
-<div class="jobs-listing">
-    <app-job-filter [ngStyle]="{'visibility': (selectedTags$ | async)?.length == 0? 'hidden' : 'visible' }"
+<div class="jobs-listing animate-face-in">
+    <app-job-filter [ngStyle]="{'visibility': (selectedTags$ | async)?.length === 0? 'hidden' : 'visible' }"
                     (updateFilter)="filterUpdatedHandler()">
     </app-job-filter>
 

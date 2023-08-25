@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output, inject } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ToolTagComponent } from '../shared/tool-tag/tool-tag.component';
 import { JoblistingService } from '../services/joblisting.service';
@@ -20,9 +20,6 @@ export class JobFilterComponent implements OnInit {
   ngOnInit(): void {
     this.selectedTags$ = this.jobService.getTags();
   }
-
-
-  @Input() tags!: any;
 
   // Output -> se pasa evento al padre
   @Output() updateFilter: EventEmitter<string> = new EventEmitter<string>();

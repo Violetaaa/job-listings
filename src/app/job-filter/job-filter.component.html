@@ -1,7 +1,7 @@
 <ul class="filter">
     <li>
         <ng-container *ngFor="let tag of selectedTags$ | async">
-            <app-tool-tag class="tag tool-tag"
+            <app-tool-tag class="tag tool-tag animate"
                           (click)=onRemoveTag(tag)
                           [name]=tag>
             </app-tool-tag>

@@ -2,6 +2,7 @@ import { Component, ElementRef, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { AuthService } from '../services/auth.service';
+import { UserCredential } from '@angular/fire/auth';
 
 
 @Component({
@@ -25,12 +26,11 @@ export class HeaderComponent {
       email: new FormControl(''),
       password: new FormControl('')
     })
-
   }
 
   registerUser(value: any) {
     this.authService.register(this.registerForm.value)
-      .then((response: any) => {
+      .then((response: any): void => {
         alert("REGISTER OK");
         console.log(response);
         this.dialog.nativeElement.close();
@@ -40,12 +40,12 @@ export class HeaderComponent {
 
   loginUser(value: any) {
     this.authService.login(this.registerForm.value)
-      .then((response: any) => {
+      .then((response: any): void => {
         alert("LOGIN OK");
         console.log(response);
         this.dialog.nativeElement.close();
       })
-      .catch((error: any) => alert(error))
+      .catch(error => alert(error))
   }
 
 }

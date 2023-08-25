@@ -39,8 +39,7 @@ export class JobListComponent implements OnInit {
   filterJobs() {
     this.filteredJobs = this.jobService.isTagEmpty() ?
       this.jobs
-      : this.jobs.filter(job => this.isToolPresent(job, this.selectedTags$))
-
+      : this.jobs.filter(job => this.isToolPresent(job))
   }
 
   addTool(tool: string): void {
@@ -48,11 +47,12 @@ export class JobListComponent implements OnInit {
     this.filterJobs();
   }
 
+
   filterUpdatedHandler(): void {
     this.filterJobs();
   }
 
-  isToolPresent(job: any, selectedTags: Observable<string[]>): boolean {
+  isToolPresent(job: any): boolean {
 
     const tagsList = this.jobService.mapBSToArray();
 
