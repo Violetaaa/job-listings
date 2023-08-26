@@ -25,7 +25,7 @@ header {
         border: 1px solid var(--color-grey-dark);
         outline: none;
     }
-    
+
     input[type=password]:focus,
     input[type=email]:focus {
        border: 1px solid var(--color-primary-dark);
@@ -33,7 +33,7 @@ header {
 
     .submit {
         button {
-            padding: 1rem 3rem;
+            padding: 1.3rem 3rem;
             margin-top: 5rem;
             border-radius: 2rem;
             width: 100%;
@@ -45,8 +45,8 @@ header {
             outline: none;
     
             &:hover, &:focus {
-                opacity: 0.9;
-                transition: opacity 400ms;
+                background-color: var(--color-primary-medium);
+                transition: all 400ms;                
             }
         }
     }
@@ -66,9 +66,21 @@ header {
             font-style: none;
 
             &:hover {
-                opacity: 0.9;
-                transition: opacity 400ms;
+                color: var(--color-primary-medium);                
+                transition: all 400ms;
             }
+        }    
+    }
+
+    .close-dialog {
+        position: fixed;
+        top: 5px;
+        right: 10px;
+        font-weight: 700;
+
+        &:hover {
+            color: var(--color-primary-medium);                
+            transition: all 400ms;
         }
     }
 }
@@ -78,8 +90,6 @@ label:last-of-type {
     display:inline-block;
 }
 
-
-
 .validation-error {
     color: crimson;
     font-size: 15px;
@@ -87,12 +97,7 @@ label:last-of-type {
     height: 15px;
 }
 
-.close-dialog {
-    position: fixed;
-    top: 5px;
-    right: 10px;
-    font-weight: 700;
-}
+
 
 dialog {
     top: 50%;
