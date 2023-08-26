@@ -1,31 +1,31 @@
-import { Component, ElementRef, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { AuthService } from '../services/auth.service';
-import { UserCredential } from '@angular/fire/auth';
 
 
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [CommonModule,
-    ReactiveFormsModule
-  ],
+  imports: [CommonModule, ReactiveFormsModule],
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss']
 })
 
-export class HeaderComponent {
+export class HeaderComponent implements OnInit {
   registerForm: FormGroup;
-
-  @ViewChild('dialogLogin') dialog!: ElementRef<any>;
+  protected isLogin!: boolean;
+  @ViewChild('loginDialog') dialog!: ElementRef<any>;
 
   constructor(private authService: AuthService) {
-
+    this.isLogin = true;
     this.registerForm = new FormGroup({
-      email: new FormControl(''),
-      password: new FormControl('')
+      email: new FormControl('', [Validators.required, Validators.email]),
+      password: new FormControl('', [Validators.required, Validators.pattern(/^[a-zA-Z0-9]{6,}$/)])
     })
+  }
+  ngOnInit(): void {
+    this.isLogin = true;
   }
 
   registerUser(value: any) {
@@ -47,5 +47,19 @@ export class HeaderComponent {
       })
       .catch(error => alert(error))
   }
+
+  closeForm(): void {
+    this.dialog.nativeElement.close();
+    this.registerForm.reset();
+  }
+
+  toggleForm(): void {
+    this.isLogin = !this.isLogin;
+    this.registerForm.reset();
+  }
+
+  get email() { return this.registerForm.get('email')!; }
+
+  get password() { return this.registerForm.get('password')!; }
 
 }

@@ -13,8 +13,7 @@ export class ToolTagComponent implements OnInit {
 
   @Input() name!: string;
 
-  // @Output() buttonClicked: EventEmitter<string> = new EventEmitter<string>();
-
+  protected isFilter!: boolean;
   protected currentClass = '';
 
   ngOnInit(): void {
@@ -36,10 +35,6 @@ export class ToolTagComponent implements OnInit {
       }
     }
   }
-
-  // onButtonClick(name: string): void {
-  //   this.buttonClicked.emit(name);
-  // }
 }
 
 

@@ -1,35 +1,81 @@
 <header>
-       <div (click)="dialogLogin.showModal()">
+       <button (click)="loginDialog.showModal()">
               <img src="assets/images/user.png"
                    alt="user account icon" />
-       </div>
-       <dialog #dialogLogin>
+       </button>
 
-              <form [formGroup]="registerForm">
-                     <h2>Create an account</h2>
-                     <br>
-                     <a (click)="dialogLogin.close()">X</a>
+       <dialog #loginDialog>
+              <form class="dialog-form"
+                    [formGroup]="registerForm">
+
+                     <!-- titles -->
+                     <div *ngIf="isLogin; else isRegister">
+                            <h2>Hello again!</h2>
+                     </div>
+                     <ng-template #isRegister>
+                            <h2>Create an account</h2>
+                     </ng-template>
+
+                     <!-- close -->
+                     <span><a class="close-dialog"
+                               (click)="closeForm">X</a>
+                     </span>
+
+                     <!-- email -->
                      <label for="email">Email address</label>
                      <input type="email"
                             formControlName="email"
-                            class="form-control" />
+                            class="form-control"
+                            [ngStyle]="{'border-color': email.invalid && (email.dirty || email.touched)? 'crimson' : ''}"
+                            placeholder="test@test.com" />
+                     <!-- email validation -->
+                     <div class="validation-error">
+                            <ng-container *ngIf="email.invalid && (email.dirty || email.touched)"
+                                          class="validation-error">
+                                   <div *ngIf="email.errors?.['required']">Email is required.</div>
+                                   <div *ngIf="email.errors?.['email']">Please enter a valid email.</div>
+                            </ng-container>
+                     </div>
+                     <!-- password -->
                      <label for="password">Password</label>
                      <input type="password"
                             class="form-control"
-                            formControlName="password" />
-                     <div class="submit">
-                            <button type="submit"
-                                    (click)="registerUser(registerForm.value)">
-                                   Register
-                            </button>
-                            <hr>
-                            <button type="submit"
-                                    (click)="loginUser(registerForm.value)">
-                                   Login
-                            </button>
-                            <br><br>
-                            <p>test@test.com - 123456</p>
+                            [ngStyle]="{'border-color': password.invalid && (password.dirty || password.touched)? 'crimson' : ''}"
+                            formControlName="password"
+                            placeholder="123456" />
+                     <!-- password validation -->
+                     <div class="validation-error">
+                            <ng-container *ngIf="password.invalid && (password.dirty || password.touched)"
+                                          class="validation-error">
+                                   <div *ngIf="password.errors?.['required']">Password is required.</div>
+                                   <div *ngIf="password.errors?.['pattern']">Password must contain at least 6
+                                          characters.</div>
+                            </ng-container>
                      </div>
+
+                     <!-- submit -->
+                     <div class="submit">
+                            <div *ngIf="isLogin; else isRegister2">
+                                   <button type="submit"
+                                           (click)="loginUser(registerForm.value)">
+                                          Login
+                                   </button>
+                            </div>
+                            <ng-template #isRegister2>
+                                   <button type="submit"
+                                           (click)="registerUser(registerForm.value)">
+                                          Register
+                                   </button>
+                            </ng-template>
+                     </div>
+                     <br><br>
+                     <!-- link to alternative form -->
+                     <div *ngIf="isLogin; else isRegister3">
+                            <p>Not a member? <a (click)="toggleForm()">Sign up</a></p>
+                     </div>
+                     <ng-template #isRegister3>
+                            <p>Already a member? <a (click)="toggleForm()">Login</a></p>
+                     </ng-template>
               </form>
        </dialog>
 </header>

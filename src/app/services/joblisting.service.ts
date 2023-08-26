@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Job } from '../models/job';
 import { BehaviorSubject } from 'rxjs/internal/BehaviorSubject';
 import { Observable } from 'rxjs/internal/Observable';
+import { of } from 'rxjs/internal/observable/of';
 
 @Injectable({
   providedIn: 'root'
@@ -194,8 +195,8 @@ export class JoblistingService {
     return this.jobs$;
   }
 
-  getJobById(id: number): Job | undefined {
-    return this.jobList.find(job => job.id === id);
+  getJobById(id: number): any {
+    return of(this.jobList.find(job => job.id === id));
   }
 
 
