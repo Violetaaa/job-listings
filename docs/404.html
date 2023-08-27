@@ -72,12 +72,25 @@
     }
   </style>
   <style>
+    :root {
+      --color-primary: hsl(180, 29%, 50%);
+      --color-primary-medium: hsl(180, 45%, 37%);
+      --color-background: hsl(180, 90%, 92%);
+      --color-grey-light: hsl(180, 31%, 95%);
+      --color-grey-medium: hsl(180, 8%, 52%);
+      --color-grey-dark: hsl(180, 14%, 20%);
+      --color-primary-dark: hsl(180, 29%, 30%)
+    }
+
+    * {
+      margin: 0;
+      padding: 0
+    }
+
     *,
     *:after,
     *:before {
-      box-sizing: inherit;
-      margin: 0;
-      padding: 0
+      box-sizing: inherit
     }
 
     html {
@@ -87,31 +100,32 @@
     }
 
     body {
+      min-width: -moz-fit-content;
       min-width: fit-content;
       min-height: 100vh;
       font-family: League Spartan, sans-serif;
       font-weight: 700;
       line-height: 1.7;
       font-size: 1.6rem;
-      background-color: #effafa
+      background-image: linear-gradient(to right bottom, #eee, var(--color-background))
     }
   </style>
   <link rel="stylesheet"
-        href="styles.E2XX2X62.css"
+        href="styles.415d57ab63b44f61.css"
         media="print"
         onload="this.media='all'"><noscript>
     <link rel="stylesheet"
-          href="styles.E2XX2X62.css">
+          href="styles.415d57ab63b44f61.css">
   </noscript>
-  <link rel="modulepreload"
-        href="chunk-ARG2PCZQ.js">
 </head>
 
 <body>
   <app-root></app-root>
-  <script src="polyfills.6B7YVSHP.js"
+  <script src="runtime.00fe18bbf5c6a215.js"
           type="module"></script>
-  <script src="main.3FCXUNUO.js"
+  <script src="polyfills.e97c3a66e41825c6.js"
+          type="module"></script>
+  <script src="main.a42104c813a0d422.js"
           type="module"></script>
 </body>
 
