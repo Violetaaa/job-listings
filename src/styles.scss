@@ -1,18 +1,29 @@
-//colors
-$primary-color: hsl(180, 29%, 50%);
-$background-color: hsl(180, 52%, 96%);
+:root {
+  --color-primary: hsl(180, 29%, 50%);
+  --color-primary-medium: hsl(180, 45%, 37%);
+  --color-background: hsl(180, 90%, 92%);
+  --color-grey-light: hsl(180, 31%, 95%);
+  --color-grey-medium: hsl(180, 8%, 52%);
+  --color-grey-dark: hsl(180, 14%, 20%);
+  --color-primary-dark: hsl(180, 29%, 30%);
+  // --shadow-dark: 0 2rem 6rem rgba(0,0,0,.3);
+  // --shadow-light: 0 2rem 5rem rgba(0,0,0,.6);
+  // --line: 1px solid var(--color-grey-light-2); 
+}
 
-$light-gray: hsl(180, 31%, 95%);
-$medium-gray: hsl(180, 8%, 52%);
-$dark-gray: hsl(180, 14%, 20%);
+* {
+  margin: 0;
+  padding: 0; 
+}
 
-//base
 *,
 *::after,
 *::before {
-  box-sizing: inherit;
-  margin: 0;
-  padding: 0;
+  box-sizing: inherit; 
+}
+
+a {
+  text-decoration: none;
 }
 
 html {
@@ -24,18 +35,15 @@ html {
 body {
   min-width: fit-content;
   min-height: 100vh;
-  font-family: 'League Spartan', sans-serif;
+  font-family: "League Spartan", sans-serif;
   font-weight: 700;
   line-height: 1.7;
   font-size: 1.6rem;
-
-  background-color: $background-color;
-//   background-size: cover;
-//   background-repeat: no-repeat;
+  background-image: linear-gradient(to right bottom,  #eee, var(--color-background));
 }
 
 dialog::backdrop {
-  background: rgba(0,0,0,0.6);
+  background: rgba(0, 0, 0, 0.6);
   backdrop-filter: blur(3px);
 }
 
@@ -43,12 +51,26 @@ ul {
   list-style: none;
 }
 
-button, a {
+button,
+a {
   cursor: pointer;
   border: none;
+}
 
-  &:hover, &:focus {
-    opacity: 0.8!important;
-    transition: all 0.3;
+.animate {
+  animation-duration: 0.4s;
+  animation-name: animate-pop;
+  animation-timing-function: ease-in;
+}
+
+@keyframes animate-pop {
+  0% {
+    opacity: 0;
+    transform: scale(0.8, 0.8);
+  }
+
+  100% {
+    opacity: 1;
+    transform: scale(1, 1);
   }
 }

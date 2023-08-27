@@ -1,8 +1,7 @@
-import { Component, EventEmitter, Input, OnInit, Output, inject } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { JoblistingService } from '../../services/joblisting.service';
 import { ToolTagComponent } from '../shared/tool-tag/tool-tag.component';
-import { JoblistingService } from '../services/joblisting.service';
-import { Observable } from 'rxjs/internal/Observable';
 
 @Component({
   selector: 'app-job-filter',
@@ -13,28 +12,22 @@ import { Observable } from 'rxjs/internal/Observable';
 })
 export class JobFilterComponent implements OnInit {
 
-  protected selectedTags$!: Observable<string[]>;
-
+  protected selectedTags!: string[];
   jobService: JoblistingService = inject(JoblistingService);
 
   ngOnInit(): void {
-    this.selectedTags$ = this.jobService.getTags();
+    this.jobService.getTags().subscribe(data => {
+      this.selectedTags = data
+    });
   }
-
-
-  @Input() tags!: any;
-
-  // Output -> se pasa evento al padre
-  @Output() updateFilter: EventEmitter<string> = new EventEmitter<string>();
 
   onRemoveTag(tag: string) {
     this.jobService.removeTag(tag);
-    this.updateFilter.emit();
   }
 
   onClearFilter() {
     this.jobService.removeAllTags();
-    this.updateFilter.emit();
   }
 
 }
+

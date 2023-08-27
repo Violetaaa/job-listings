@@ -32,13 +32,15 @@
                 "glob": "**/*",
                 "input": "src/assets",
                 "output": "/assets/"
-           }
+              }
             ],
             "styles": [
               "src/styles.scss"
             ],
             "stylePreprocessorOptions": {
-              "includePaths": ["."]
+              "includePaths": [
+                "."
+              ]
             },
             "scripts": []
           },
@@ -105,8 +107,22 @@
             ],
             "scripts": []
           }
+        },
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
+          "options": {
+            "lintFilePatterns": [
+              "src/**/*.ts",
+              "src/**/*.html"
+            ]
+          }
         }
       }
     }
+  },
+  "cli": {
+    "schematicCollections": [
+      "@angular-eslint/schematics"
+    ]
   }
 }
