@@ -1,0 +1,105 @@
+<header>
+       <div class="account-icon">
+              <ng-container *ngIf="!userEmail ; else userInfo">
+                     <button (click)="loginDialog.showModal()">
+                            <img src="assets/images/user.png"
+                                 alt="user account icon" />
+                     </button>
+              </ng-container>
+              <ng-template #userInfo>
+                     <h2>Hi, <span>{{ userEmail }}</span></h2>
+              </ng-template>
+       </div>
+
+       <dialog #loginDialog>
+              <form class="dialog-form"
+                    [formGroup]="registerForm">
+
+                     <!-- close -->
+                     <span><a class="close-dialog"
+                               (click)="closeForm()">X</a>
+                     </span>
+
+                     <!-- error response from form submit -->
+                     <div *ngIf="errorMessage; else form">
+                            <h1>Oops!</h1>
+                            <h2>{{ errorMessage }}</h2>
+                            <img src="assets/images/error.svg"
+                                 alt="error">
+                            <button class="form-button"
+                                    (click)="closeForm()">Close</button>
+                     </div>
+
+                     <!-- login/register form -->
+                     <ng-template #form>
+                            <!-- titles -->
+                            <div *ngIf="isLogin; else isRegister">
+                                   <h2>Hello again!</h2>
+                            </div>
+                            <ng-template #isRegister>
+                                   <h2>Create an account</h2>
+                            </ng-template>
+
+                            <!-- email -->
+                            <label for="email">Email address</label>
+                            <input type="email"
+                                   formControlName="email"
+                                   class="form-control"
+                                   [ngStyle]="{'border-color': email.invalid && (email.dirty || email.touched)? 'crimson' : ''}"
+                                   placeholder="Use 'test@test.com' to login" />
+                            <!-- email validation -->
+                            <div class="validation-error">
+                                   <ng-container *ngIf="email.invalid && (email.dirty || email.touched)"
+                                                 class="validation-error">
+                                          <div *ngIf="email.errors?.['required']">x Email is required.</div>
+                                          <div *ngIf="email.errors?.['email']">x Please enter a valid email.</div>
+                                   </ng-container>
+                            </div>
+                            <!-- password -->
+                            <label for="password">Password</label>
+                            <input type="password"
+                                   class="form-control"
+                                   [ngStyle]="{'border-color': password.invalid && (password.dirty || password.touched)? 'crimson' : ''}"
+                                   formControlName="password"
+                                   placeholder="Use '123456' to login" />
+                            <!-- password validation -->
+                            <div class="validation-error">
+                                   <ng-container *ngIf="password.invalid && (password.dirty || password.touched)"
+                                                 class="validation-error">
+                                          <div *ngIf="password.errors?.['required']">x Password is required.</div>
+                                          <div *ngIf="password.errors?.['minLength']">x Password must contain at least 6
+                                                 characters.</div>
+                                   </ng-container>
+                            </div>
+
+                            <!-- submit -->
+                            <div class="submit">
+                                   <div *ngIf="isLogin; else isRegister2">
+                                          <button class="form-button"
+                                                  type="submit"
+                                                  (click)="loginUser()"
+                                                  [disabled]="this.registerForm.invalid">
+                                                 Login
+                                          </button>
+                                   </div>
+                                   <ng-template #isRegister2>
+                                          <button class="form-button"
+                                                  type="submit"
+                                                  (click)="registerUser()"
+                                                  [disabled]="this.registerForm.invalid">
+                                                 Register
+                                          </button>
+                                   </ng-template>
+                            </div>
+                            <br><br>
+                            <!-- link to alternative form -->
+                            <div *ngIf="isLogin; else isRegister3">
+                                   <p>Not a member? <a (click)="toggleForm()">Sign up</a></p>
+                            </div>
+                            <ng-template #isRegister3>
+                                   <p>Already a member? <a (click)="toggleForm()">Login</a></p>
+                            </ng-template>
+                     </ng-template>
+              </form>
+       </dialog>
+</header>

@@ -1,8 +1,8 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
-import { JoblistingService } from '../services/joblisting.service';
-import { Job } from '../models/job';
+import { JoblistingService } from '../../services/joblisting.service';
+import { Job } from '../../models/job';
 import { JobCardComponent } from "../job-card/job-card.component";
 
 @Component({

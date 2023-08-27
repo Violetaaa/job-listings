@@ -1,0 +1,14 @@
+<ul class="filter animate">
+    <div class="container-tags">
+        <li *ngFor="let tag of selectedTags">
+            <app-tool-tag class="tag tool-tag animate"
+                          (click)=onRemoveTag(tag)
+                          [name]=tag>
+                <span>x</span>
+            </app-tool-tag>
+        </li>
+    </div>
+    <li class="clear-button">
+        <button (click)="onClearFilter()">Clear</button>
+    </li>
+</ul>

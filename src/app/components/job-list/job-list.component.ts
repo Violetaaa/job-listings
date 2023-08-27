@@ -1,12 +1,10 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Job } from '../models/job';
-import { JoblistingService } from '../services/joblisting.service';
+import { Job } from '../../models/job';
+import { JoblistingService } from '../../services/joblisting.service';
 import { Router } from '@angular/router';
 import { JobFilterComponent } from '../job-filter/job-filter.component';
-import { ToolTagComponent } from '../shared/tool-tag/tool-tag.component';
-import { JobCardComponent } from '../job-card/job-card.component';
-import { Observable } from 'rxjs/internal/Observable';
+import { ToolTagComponent } from '../shared/tool-tag/tool-tag.component'; import { JobCardComponent } from '../job-card/job-card.component';
 
 @Component({
   selector: 'app-job-list',

@@ -1,0 +1,39 @@
+<div class="card">
+    <div class="card-image">
+        <img src="assets/images/faceit.svg"
+             alt="company logo">
+    </div>
+
+    <div class="card-main">
+        <div class="title-section">
+            <h4 class="job-company">{{ job.company }}</h4>
+            <ul>
+                <li *ngIf=job.new>
+                    <app-tool-tag class="button-tag"
+                                  (click)=onAddTool(newTag)
+                                  [name]=newTag>
+                    </app-tool-tag>
+                </li>
+                <li *ngIf=job.featured>
+                    <app-tool-tag class="button-tag"
+                                  (click)=onAddTool(featuredTag)
+                                  [name]=featuredTag>
+                    </app-tool-tag>
+                </li>
+            </ul>
+        </div>
+        <h3 class="job-position">{{ job.position }}</h3>
+        <h5 class="job-others">{{ job.postedAt }}&emsp;·&emsp;{{ job.contract }}&emsp;·&emsp;{{ job.location }}
+        </h5>
+    </div>
+
+    <div class="tool-tags-section">
+        <ul>
+            <li *ngFor="let tag of job.tools">
+                <app-tool-tag (click)=onAddTool(tag)
+                              [name]=tag>
+                </app-tool-tag>
+            </li>
+        </ul>
+    </div>
+</div>

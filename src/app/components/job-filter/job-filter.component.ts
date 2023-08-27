@@ -1,7 +1,7 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { JoblistingService } from '../../services/joblisting.service';
 import { ToolTagComponent } from '../shared/tool-tag/tool-tag.component';
-import { JoblistingService } from '../services/joblisting.service';
 
 @Component({
   selector: 'app-job-filter',

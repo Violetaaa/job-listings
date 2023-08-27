@@ -1,9 +1,9 @@
 import { Component, EventEmitter, Input, Output, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Job } from '../models/job';
+import { Job } from '../../models/job';
+import { JoblistingService } from '../../services/joblisting.service';
 import { ToolTagComponent } from '../shared/tool-tag/tool-tag.component';
 import { Tags } from '../shared/constants';
-import { JoblistingService } from '../services/joblisting.service';
 
 @Component({
   selector: 'app-job-card',
